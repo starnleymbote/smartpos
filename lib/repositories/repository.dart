@@ -48,4 +48,11 @@ class Repository {
     return await connection
         .rawDelete('DELETE FROM $table WHERE id = $productId');
   }
+
+  searchData(table, productName) async {
+    var connection = await database;
+
+    return await connection
+        .query(table, where: 'name LIKE ?', whereArgs: [productName]);
+  }
 }

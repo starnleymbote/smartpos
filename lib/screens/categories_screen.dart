@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartpos/helpers/search_data.dart';
 import 'package:smartpos/models/product.dart';
 import 'package:smartpos/services/product_service.dart';
 
@@ -20,8 +21,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   var _product = Product();
   var _productService = ProductService();
+  //var _searchProduct = DataSearch();
 
   List<Product> _productList = List<Product>();
+  List<String> _nameList = ['ok', 'it', 'is'];
 
   var product;
 
@@ -33,6 +36,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
+  getNames() {
+    _nameList = List<String>();
+    var products = _productService.readProducts();
+
+    products.forEach((product) {
+      setState(() {
+        _nameList.add(product['name']);
+      });
+    });
+    return _nameList;
+  }
 
   //read all the products
   getAllProducts() async {
@@ -47,6 +62,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         productModel.name = product['name'];
         productModel.costPrice = product['cost'];
         productModel.sellingPrice = product['sell'];
+
+        print(productModel.sellingPrice);
+        print('heellooooo');
 
         _productList.add(productModel);
       });
@@ -94,6 +112,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
                   Navigator.pop(context);
                   getAllProducts();
+                  _productNameController.clear();
+                  _productCostController.clear();
+                  _productSellingController.clear();
                 },
                 child: Text(
                   'Save',
@@ -327,7 +348,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
           elevation: 0.0,
         ),
         title: Text('Product List'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                showSearch(
+                    context: context, delegate: DataSearch(_productList));
+                //print(getAllProducts().toString());
+              },
+              icon: Icon(Icons.search))
+        ],
       ),
       body: ListView.builder(
           itemCount: _productList.length,

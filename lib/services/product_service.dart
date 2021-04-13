@@ -31,4 +31,8 @@ class ProductService {
   deleteProduct(productId) async {
     return await _repository.deleteData('products', productId);
   }
+
+  searchProduct(productName) async {
+    return await _repository.searchData('products', productName);
+  }
 }
