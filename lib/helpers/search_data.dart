@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:smartpos/models/product.dart';
+import 'package:smartpos/screens/categories_screen.dart';
 
-const List _productsName = [];
+var itemIndex;
+CategoryScreen categoryscreen = CategoryScreen();
 
 class DataSearch extends SearchDelegate<String> {
   DataSearch(this.recentNames);
-
-//  var names = _productsName.toList();
-
-  //var recentNames = _productsName.toList();
-  var dirt = [];
-  List<Product> names = [];
 
   List<Product> recentNames = [];
 
@@ -43,6 +39,51 @@ class DataSearch extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
 
+    return Card(
+      elevation: 7.5,
+      child: ListTile(
+        title: Padding(
+          padding: EdgeInsets.only(
+            top: 4.0,
+            left: 8.0,
+            right: 4.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Product Name : ${recentNames[itemIndex].name}',
+                style: TextStyle(
+                  letterSpacing: 1.5,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Product Cost : ${recentNames[itemIndex].costPrice}',
+                style: TextStyle(
+                  letterSpacing: 1.5,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Product Selling Price : ${recentNames[itemIndex].sellingPrice}',
+                style: TextStyle(
+                  letterSpacing: 1.5,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    return ListTile(
+      title: Text(recentNames[itemIndex].name.toString()),
+    );
     throw UnimplementedError();
   }
 
@@ -58,6 +99,9 @@ class DataSearch extends SearchDelegate<String> {
       itemBuilder: (context, index) => ListTile(
         onTap: () {
           showResults(context);
+          print("printing the index number");
+          itemIndex = index;
+          print(itemIndex);
         },
         leading: Icon(Icons.shopping_cart),
         title: Text(suggestionList.elementAt(index).name),

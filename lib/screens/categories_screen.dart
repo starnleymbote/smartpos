@@ -63,9 +63,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
         productModel.costPrice = product['cost'];
         productModel.sellingPrice = product['sell'];
 
-        print(productModel.sellingPrice);
-        print('heellooooo');
-
         _productList.add(productModel);
       });
     });
