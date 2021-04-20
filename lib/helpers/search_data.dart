@@ -39,17 +39,19 @@ class DataSearch extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
 
-    return Card(
-      elevation: 7.5,
-      child: ListTile(
-        title: Padding(
-          padding: EdgeInsets.only(
-            top: 4.0,
-            left: 8.0,
-            right: 4.0,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 11.5,
+        child: ListTile(
+          leading: IconButton(
+            icon: Icon(
+              Icons.edit,
+              color: Colors.blueAccent,
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Product Name : ${recentNames[itemIndex].name}',
@@ -59,22 +61,28 @@ class DataSearch extends SearchDelegate<String> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                'Product Cost : ${recentNames[itemIndex].costPrice}',
-                style: TextStyle(
-                  letterSpacing: 1.5,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Product Selling Price : ${recentNames[itemIndex].sellingPrice}',
-                style: TextStyle(
-                  letterSpacing: 1.5,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              // Text(
+              //   'Product Cost : ${recentNames[itemIndex].costPrice}',
+              //   style: TextStyle(
+              //     letterSpacing: 1.5,
+              //     color: Colors.black87,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+              // Text(
+              //   'Product Selling Price : ${recentNames[itemIndex].sellingPrice}',
+              //   style: TextStyle(
+              //     letterSpacing: 1.5,
+              //     color: Colors.black87,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ))
             ],
           ),
         ),
